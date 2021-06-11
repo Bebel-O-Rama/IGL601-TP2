@@ -1,0 +1,27 @@
+Make global --> do not retrun after first match
+
+
+
+Project name :   "/(?<=project: )(\w*\.?)/"
+
+
+Deps include :   "/(?<=deps_include:)(?:\r?\n(?> var: )(\w+))+/"
+   ... , puis:   "/(?<= var: )(\w+)/"
+
+
+Deps_library :   "/(?<=deps_library:)(?:\r?\n(?> var: )(\w+))+/"
+   ... , puis:   "/(?<= var: )(\w+)/"
+
+
+Libs         :   "/(?<= libs:)(\r?\n(?= - )(.*))+/"
+   ... , puis:   "/(?<= - )(\w+)$/"
+
+
+Compile      :   "/(?<=compile:\r\n)?(?:(?<= - )f(?:[0-9]|[1-9][0-9]+) : )(\w+\.cpp)/"
+   ... , puis:   "/(?<= : )(\w+\.cpp)$/"  
+
+*Note* : On ne pourrait utiliser que la 2e regex dans le compile, mais cela est un peu de la triche
+
+Files        :   "/(?<=files:)(?:\r?\n - (.+))+/"
+   ... , puis:   "/(?<= - )(\w+)$/"
+
